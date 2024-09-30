@@ -17,14 +17,20 @@ To install these functions use the pacman lines
 
 ``` r
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load_gh("alapo/mtr")
+pacman::p_load_gh("alapz/mtr")
 ```
 
 or you can use the devtools lines below.
 
 ``` r
-devtools::install_github("alapo/mtr")
+devtools::install_github("alapz/mtr")
 ```
+
+# resave
+
+This function allows the user to “save” data from their environment. The
+issue with the base R function is that it overwrites everything. This
+function will only re-write the file you specify, if it is present.
 
 ## Example
 

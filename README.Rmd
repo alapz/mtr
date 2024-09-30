@@ -35,6 +35,10 @@ or you can use the devtools lines below.
 devtools::install_github("alapz/mtr")
 ```
 
+# resave
+
+This function allows the user to "save" data from their environment. The issue with the base R function is that it overwrites everything. This function will only re-write the file you specify, if it is present. 
+
 
 ## Example
 
