@@ -77,7 +77,7 @@ say_something <- function(message , voice) {
 
 #' !in
 #'
-#' Negate the %in% function
+#' This function does not currently work. Negate the %in% function
 #'
 #' @param list List of files from your environment you want to save
 #' @param file Name of the RData file you want to save
