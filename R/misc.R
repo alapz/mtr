@@ -86,3 +86,18 @@ say_something <- function(message , voice) {
 #' @export
 #'
 `%!in%` = Negate(`%in%`)
+
+# ▬ roundme -----
+#' siground
+#'
+#' Will only apply signif to the fractional part of the number. Original found function on SO here: https://stackoverflow.com/questions/71736040/signif-doesnt-give-me-the-correct-number-of-significant-digits-in-r
+#'
+#' @param list columns you want to edit
+#' @param file Name of the RData file you want to save
+#'
+#' @return
+#' @export
+#'
+siground <- function(x, digits = 3) {
+  x %/% 1 + signif(x %% 1, digits)
+} 
