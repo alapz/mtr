@@ -1,14 +1,71 @@
-#' spss2date
+#' Convert SPSS numeric date values to `Date`
 #'
-#' Used to convert SPSS dates.   # src: https://stackoverflow.com/questions/37880975/spss-date-format-when-imported-into-r
+#' SPSS encodes dates as the number of seconds since 1582-10-14. This helper
+#' converts those numeric values into R [Date] objects. See
+#' <https://stackoverflow.com/questions/37880975/spss-date-format-when-imported-into-r>.
 #'
-#' @param list List of files from your environment you want to save
-#' @param file Name of the RData file you want to save
+#' @param x Numeric vector containing SPSS date values (seconds since 1582-10-14).
 #'
-#' @return
+#' @return A [Date] vector corresponding to `x`.
 #' @export
 #'
-spss2date <- function(x) as.Date(x/86400, origin = "1582-10-14")
+spss2date <- function(x) {
+  as.Date(x / 86400, origin = "1582-10-14")
+}
+
+#' Reorder data frame columns
+#'
+#' Move one or more columns in a data frame relative to another column without
+#' retyping the full column order. Adapted from
+#' <https://stackoverflow.com/questions/3369959/moving-columns-within-a-data-frame-without-retyping>.
+#'
+#' @param df A data frame.
+#' @param move_this Character vector of column names to move.
+#' @param next_to_this Name of the column that `move_this` should be moved
+#'   before or after.
+#' @param before Logical indicating whether `move_this` should be placed before
+#'   (`TRUE`) or after (`FALSE`, the default) `next_to_this`.
+#'
+#' @return A data frame with columns reordered.
+#' @export
+#'
+move.col <- function(df, move_this, next_to_this, before = FALSE) {
+  if (before == FALSE) {
+    df[
+      , c(
+        match(setdiff(names(df)[1:which(names(df) == next_to_this)], move_this), names(df)),
+        match(move_this, names(df)),
+        match(
+          setdiff(
+            names(df)[which(names(df) == next_to_this):ncol(df)],
+            c(next_to_this, move_this)
+          ),
+          names(df)
+        )
+      )
+    ]
+  } else {
+    df[
+      , c(
+        match(
+          setdiff(
+            names(df)[1:(which(names(df) == next_to_this))],
+            c(next_to_this, move_this)
+          ),
+          names(df)
+        ),
+        match(move_this, names(df)),
+        match(
+          setdiff(
+            names(df)[(which(names(df) == next_to_this)):ncol(df)],
+            move_this
+          ),
+          names(df)
+        )
+      )
+    ]
+  }
+}
 
 # ▬ clear.labels ------
 #' clear.labels
