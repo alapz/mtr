@@ -2,18 +2,19 @@
 % Please edit documentation in R/misc.R
 \name{spss2date}
 \alias{spss2date}
-\title{spss2date}
+\title{Convert SPSS numeric date values to \code{Date}}
 \usage{
 spss2date(x)
 }
 \arguments{
-\item{list}{List of files from your environment you want to save}
-
-\item{file}{Name of the RData file you want to save}
+\item{x}{Numeric vector containing SPSS date values (seconds since
+1582-10-14).}
 }
 \value{
-
+A \code{Date} vector corresponding to \code{x}.
 }
 \description{
-Used to convert SPSS dates.   # src: https://stackoverflow.com/questions/37880975/spss-date-format-when-imported-into-r
+SPSS encodes dates as the number of seconds since 1582-10-14. This helper
+converts those numeric values into R \code{Date} objects. See
+\url{https://stackoverflow.com/questions/37880975/spss-date-format-when-imported-into-r}.
 }
