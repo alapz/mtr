@@ -157,4 +157,38 @@ say_something <- function(message , voice) {
 #'
 siground <- function(x, digits = 3) {
   x %/% 1 + signif(x %% 1, digits)
-} 
+}
+
+#' Insert a Word comment from R Markdown
+#'
+#' Generates the Pandoc syntax required to render an inline comment when an
+#' R Markdown document is knitted to Word (`docx`). The resulting document will
+#' show the plain text passed to `comment` in the source (Rmd) file, while the
+#' rendered Word file displays the comment in the margin and inserts the
+#' `highlight` content in the body text. See the examples for a comparison of
+#' the two views.
+#'
+#' @details
+#' * **R Markdown view:** `r word_comment("This is in the comment",
+#'   "**This is in the document**")`
+#' * **Word view:** margin comment shows "This is in the comment" while the
+#'   body text renders "This is in the document" with any supplied formatting.
+#'
+#' @param comment Character string that should appear in the Word comment.
+#' @param highlight Character string that should remain in the document body
+#'   alongside the comment. Defaults to an empty string for no highlight.
+#'
+#' @return A character string containing the Pandoc comment markup when the
+#'   document is being rendered to Word; otherwise `NULL`.
+#' @export
+#'
+#' @examples
+#' word_comment("This is in the comment", "**This is in the document**")
+word_comment <- function(comment, highlight = "") {
+  if (isTRUE(knitr:::pandoc_to() == "docx")) {
+    paste0(
+      '[', comment, ']{.comment-start id="0" author="Andrew Lapointe" ',
+      'date=', Sys.Date(), '}', highlight, '[]{.comment-end id="0"}'
+    )
+  }
+}
