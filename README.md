@@ -57,7 +57,7 @@ This is a basic example which shows you how to solve a common problem:
 pacman::p_load(mtr, tidyverse) # load libraries for this example
 
 # 1. Create something
-df -> mtcars
+df <- mtcars
 
 # 2. Save it to RData using resave
 mtr::resave(df, file = "data/mydata.RData")
