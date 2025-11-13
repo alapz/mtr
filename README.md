@@ -26,6 +26,21 @@ or you can use the devtools lines below.
 devtools::install_github("alapz/mtr")
 ```
 
+## word_comment
+
+The `word_comment()` helper inserts inline Word comments when you knit an R
+Markdown document to a DOCX file.
+
+**R Markdown view**
+
+```
+`r word_comment("This is in the comment", "**This is in the document**")`
+```
+
+**Word (DOCX) view**
+
+![Word document showing the inline comment](https://i.imgur.com/NWedycT.png)
+
 # resave
 
 This function allows the user to “save” data from their environment. The
